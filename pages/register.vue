@@ -2,14 +2,19 @@
   <div class="container">
     <div class="screen">
       <div class="screen__content">
-        <form class="login">
+        <form class="login" @submit.prevent="submit">
           <div class="login__field">
             <i class="login__icon fas fa-user"></i>
-            <input type="text" class="login__input" placeholder="User name" />
+            <input
+              type="text"
+              class="login__input"
+              placeholder="User name"
+              v-model="name"
+            />
           </div>
           <div class="login__field">
             <i class="login__icon fas fa-user"></i>
-            <input type="text" class="login__input" placeholder="Email" />
+            <input type="text" class="login__input" placeholder="Email" v-model="email" />
           </div>
           <div class="login__field">
             <i class="login__icon fas fa-lock"></i>
@@ -17,6 +22,7 @@
               type="password"
               class="login__input"
               placeholder="Password"
+              v-model="password"
             />
           </div>
           <button class="button login__submit">
@@ -26,25 +32,42 @@
         </form>
       </div>
       <div class="screen__background">
-        <span
-          class="screen__background__shape screen__background__shape4"
-        ></span>
-        <span
-          class="screen__background__shape screen__background__shape3"
-        ></span>
-        <span
-          class="screen__background__shape screen__background__shape2"
-        ></span>
-        <span
-          class="screen__background__shape screen__background__shape1"
-        ></span>
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async submit() {
+      let url = "http://localhost:5000/register";
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        }),
+      });
+      await this.$router.push("/login");
+    },
+  },
+};
 </script>
 
 <style>
@@ -186,20 +209,17 @@ body {
   cursor: pointer;
   transition: 0.2s;
 }
-
 .login__submit:active,
 .login__submit:focus,
 .login__submit:hover {
   border-color: #6a679e;
   outline: none;
 }
-
 .button__icon {
   font-size: 24px;
   margin-left: auto;
   color: #7875b5;
 }
-
 .social-login {
   position: absolute;
   height: 140px;

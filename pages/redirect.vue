@@ -11,17 +11,23 @@ export default {
       message: "",
     };
   },
-  async mounted() {
-    let url = "http://localhost:5000/user";
-    const response = await fetch(url, {
-      credentials: "include",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const content = await response.json();
-    console.log(content);
-    console.log("homepage");
+  async created() {
+    try {
+      let url = "http://localhost:5000/user";
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
+      const content = await response.json();
+      this.message = "Hi " + content.message.name + " you are logged in";
+      this.$nuxt.$emit("auth", true);
+    } catch (error) {
+      this.message = "you are not logged in";
+      this.$emit("auth", false);
+    }
   },
 };
 </script>
