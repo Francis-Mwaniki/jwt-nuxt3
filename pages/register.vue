@@ -60,7 +60,8 @@ export default {
   },
   methods: {
     async submit() {
-      let url = "http://localhost:7000/register";
+      /* let url = "http://localhost:7000/register"; */
+      let url = "/api/v1/register";
       let res = await fetch(url, {
         method: "POST",
         headers: {

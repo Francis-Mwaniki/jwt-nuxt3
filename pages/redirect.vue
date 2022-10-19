@@ -53,7 +53,8 @@ export default {
   },
   async mounted() {
     try {
-      let url = "http://localhost:7000/user";
+      /* let url = "http://localhost:7000/user"; */
+      let url = "/api/v1/user";
       const response = await fetch(url, {
         credentials: "include",
         headers: {

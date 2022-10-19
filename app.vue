@@ -13,7 +13,8 @@ export default {
   },
   async mounted() {
     try {
-      let url = "http://localhost:7000/user";
+      /* let url = "http://localhost:7000/user"; */
+      let url = "/api/v1/user";
       const response = await fetch(url, {
         credentials: "include",
         headers: {
@@ -36,7 +37,8 @@ export default {
   },
   methods: {
     async logout() {
-      let url = "http://localhost:7000/logout";
+      /*  let url = "http://localhost:7000/logout"; */
+      let url = "/api/v1/logout";
       let res = await fetch(url, {
         method: "POST",
         credentials: "include",
@@ -137,41 +139,43 @@ export default {
             ></span>
           </div>
         </div>
-        <div class="home-wrapper" v-else>
-          <NuxtLink href="#" @click="logout">logout</NuxtLink>
-          <span style="padding-top: 3px"
-            ><svg
-              style="height: 40px; width: 40px; color: white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path></svg
-          ></span>
-        </div>
-        <div class="home-wrapper">
-          <NuxtLink to="redirect">VisitUs</NuxtLink>
-          <span style="padding-top: 3px"
-            ><svg
-              style="height: 40px; width: 40px; color: white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path></svg
-          ></span>
+        <div v-else class="sub-auth">
+          <div class="home-wrapper">
+            <NuxtLink href="#" @click="logout">logout</NuxtLink>
+            <span style="padding-top: 3px"
+              ><svg
+                style="height: 40px; width: 40px; color: white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path></svg
+            ></span>
+          </div>
+          <div class="home-wrapper">
+            <NuxtLink to="redirect">VisitUs</NuxtLink>
+            <span style="padding-top: 3px"
+              ><svg
+                style="height: 40px; width: 40px; color: white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path></svg
+            ></span>
+          </div>
         </div>
       </div>
     </nav>
