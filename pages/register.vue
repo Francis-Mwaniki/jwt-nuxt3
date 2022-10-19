@@ -53,7 +53,7 @@ export default {
   methods: {
     async submit() {
       let url = "http://localhost:5000/register";
-      await fetch(url, {
+      let res = await fetch(url, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -64,7 +64,14 @@ export default {
           password: this.password,
         }),
       });
-      await this.$router.push("/login");
+      if (res.ok) {
+        let data = await res.json();
+        alert(data.message);
+        await this.$router.push("/login");
+      } else {
+        let data = await res.json();
+        alert(data.message);
+      }
     },
   },
 };

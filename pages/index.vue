@@ -20,8 +20,6 @@ export default {
       },
     });
     const content = await response.json();
-    console.log(content);
-    console.log("homepage");
   },
 };
 </script>

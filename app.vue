@@ -15,13 +15,14 @@ export default {
           "Content-type": "application/json",
         },
       });
-      const content = await response.json();
-      if (!content.message.message == "unauthenticated") {
+      if (response.ok) {
+        const content = await response.json();
         this.auth = true;
         this.message = "Hi " + content.message.name + " you are logged in";
       } else {
+        const content = await response.json();
         this.auth = false;
-        this.message = "you are not logged in";
+        this.message = content.message;
       }
     } catch (error) {
       this.auth = false;
@@ -30,15 +31,23 @@ export default {
   },
   methods: {
     async logout() {
-      let url = "http://localhost:5000/user";
-      await fetch(url, {
+      let url = "http://localhost:5000/logout";
+      let res = await fetch(url, {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-type": "application/json",
         },
       });
-      this.$router.push("/login");
+      if (res.ok) {
+        let data = await res.json();
+        alert(data.message);
+        this.$router.push("/login");
+      } else {
+        let data = await res.json();
+        alert(data.message);
+        this.$router.push("/register");
+      }
     },
   },
 };
