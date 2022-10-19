@@ -9,12 +9,19 @@
               type="text"
               class="login__input"
               placeholder="User name"
+              required
               v-model="name"
             />
           </div>
           <div class="login__field">
             <i class="login__icon fas fa-user"></i>
-            <input type="text" class="login__input" placeholder="Email" v-model="email" />
+            <input
+              type="text"
+              class="login__input"
+              placeholder="Email"
+              v-model="email"
+              required
+            />
           </div>
           <div class="login__field">
             <i class="login__icon fas fa-lock"></i>
@@ -22,6 +29,7 @@
               type="password"
               class="login__input"
               placeholder="Password"
+              required
               v-model="password"
             />
           </div>
@@ -52,7 +60,7 @@ export default {
   },
   methods: {
     async submit() {
-      let url = "http://localhost:5000/register";
+      let url = "http://localhost:7000/register";
       let res = await fetch(url, {
         method: "POST",
         headers: {

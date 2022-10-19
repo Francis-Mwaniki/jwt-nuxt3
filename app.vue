@@ -8,7 +8,7 @@ export default {
   },
   async mounted() {
     try {
-      let url = "http://localhost:5000/user";
+      let url = "http://localhost:7000/user";
       const response = await fetch(url, {
         credentials: "include",
         headers: {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     async logout() {
-      let url = "http://localhost:5000/logout";
+      let url = "http://localhost:7000/logout";
       let res = await fetch(url, {
         method: "POST",
         credentials: "include",

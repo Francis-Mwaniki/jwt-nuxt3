@@ -13,7 +13,7 @@ export default {
   },
   async created() {
     try {
-      let url = "http://localhost:5000/user";
+      let url = "http://localhost:7000/user";
       const response = await fetch(url, {
         method: "GET",
         headers: {
