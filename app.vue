@@ -16,14 +16,30 @@ export default {
         },
       });
       const content = await response.json();
-      if (content.message) {
+      if (!content.message.message == "unauthenticated") {
         this.auth = true;
+        this.message = "Hi " + content.message.name + " you are logged in";
       } else {
         this.auth = false;
+        this.message = "you are not logged in";
       }
     } catch (error) {
       this.auth = false;
+      this.message = "you are not logged in";
     }
+  },
+  methods: {
+    async logout() {
+      let url = "http://localhost:5000/user";
+      await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      this.$router.push("/login");
+    },
   },
 };
 </script>
@@ -48,7 +64,7 @@ export default {
         ></span>
       </div>
       <div class="auth">
-        <div class="" v-if="!auth">
+        <div class="sub-auth" v-if="!auth">
           <div class="home-wrapper">
             <NuxtLink to="register">Register</NuxtLink>
             <span style="padding-top: 3px"
@@ -87,7 +103,7 @@ export default {
           </div>
         </div>
         <div class="home-wrapper" v-else>
-          <NuxtLink href="#">logout</NuxtLink>
+          <NuxtLink href="#" @click="logout">logout</NuxtLink>
           <span style="padding-top: 3px"
             ><svg
               style="height: 40px; width: 40px; color: white"
@@ -105,6 +121,7 @@ export default {
           ></span>
         </div>
       </div>
+      <div>{{ message }}</div>
     </nav>
     <NuxtPage />
   </main>
@@ -148,6 +165,13 @@ main {
   color: white;
   margin: auto;
   text-decoration: none;
+}
+.sub-auth {
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  gap: 5px;
 }
 a {
   color: aliceblue;
