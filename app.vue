@@ -1,5 +1,10 @@
 <script>
 export default {
+  watch: {
+    $route() {
+      location.reload();
+    },
+  },
   data() {
     return {
       message: "",
@@ -39,14 +44,17 @@ export default {
           "Content-type": "application/json",
         },
       });
+
       if (res.ok) {
         let data = await res.json();
         alert(data.message);
         this.$router.push("/login");
+        location.reload();
       } else {
         let data = await res.json();
         alert(data.message);
         this.$router.push("/register");
+        location.reload();
       }
     },
   },
@@ -130,8 +138,8 @@ export default {
           ></span>
         </div>
       </div>
-      <div>{{ message }}</div>
     </nav>
+    <div class="msg-auth">{{ message }}</div>
     <NuxtPage />
   </main>
 </template>
@@ -140,6 +148,8 @@ export default {
 body {
   background: linear-gradient(90deg, teal, black, indigo);
   color: wheat;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 main {
   position: relative;
@@ -157,7 +167,7 @@ main {
   padding: 9px;
   z-index: 2;
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 50px;
   align-items: flex-end;
   display: flex;
   color: white;
@@ -189,5 +199,16 @@ a {
 }
 a:hover {
   border-radius: 3px;
+}
+.msg-auth {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  margin: auto;
+  top: 70px;
+  left: 10px;
+  right: 0px;
+  position: relative;
+  z-index: 3;
 }
 </style>

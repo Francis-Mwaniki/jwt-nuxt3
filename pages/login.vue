@@ -64,7 +64,8 @@ export default {
       if (res.ok) {
         let data = await res.json();
         alert(data.message);
-        await this.$router.push("/");
+        await this.$router.push("/redirect");
+        location.reload();
       } else {
         let data = await res.json();
         alert(data.message);
